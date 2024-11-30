@@ -1,0 +1,2583 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{book}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+\frontmatter
+
+\mainmatter
+\chapter{Nazwa Yuan Adelia Putri\_23030630095\_EMT4Statistika (1)}\label{nazwa-yuan-adelia-putri_23030630095_emt4statistika-1}
+
+Nama : Nazwa Yuan Adelia Putri Kelas : Matematika B NIM : 23030630095
+
+\chapter{EMT untuk Statistika}\label{emt-untuk-statistika}
+
+Dalam buku catatan ini, kami mendemonstrasikan plot statistik utama, pengujian, dan distribusi di Euler.
+
+Mari kita mulai dengan beberapa statistik deskriptif. Ini bukan pengantar statistik. Jadi, Anda mungkin memerlukan beberapa latar belakang untuk memahami detailnya.
+
+Asumsikan pengukuran berikut. Kami ingin menghitung nilai rata-rata dan standar deviasi yang diukur.
+
+\textgreater M={[}1000,1004,998,997,1002,1001,998,1004,998,997{]}; \ldots{}\\
+\textgreater{} mean(M), dev(M),
+
+\begin{verbatim}
+999.9
+2.72641400622
+\end{verbatim}
+
+Kita dapat memplot plot kotak-dan-kumis untuk data. Dalam kasus kami tidak ada outlier.
+
+\textgreater boxplot(M):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-001.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-001.png}
+\end{figure}
+
+Kami menghitung probabilitas bahwa suatu nilai lebih besar dari 1005, dengan asumsi nilai terukur dan distribusi normal.
+
+Semua fungsi untuk distribusi di Euler diakhiri dengan \ldots dis dan menghitung distribusi probabilitas kumulatif (CPF).
+
+\[\text{normaldis(x,m,d)}=\int_{-\infty}^x \frac{1}{d\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{t-m}{d})^2}\ dt.\]Kami mencetak hasilnya dalam \% dengan akurasi 2 digit menggunakan fungsi cetak.
+
+\textgreater print((1-normaldis(1005,mean(M),dev(M)))*100,2,unit='' \%``)
+
+\begin{verbatim}
+      3.07 %
+\end{verbatim}
+
+Untuk contoh berikutnya, kami mengasumsikan jumlah pria berikut dalam rentang ukuran yang diberikan.
+
+\textgreater r=155.5:4:187.5; v={[}22,71,136,169,139,71,32,8{]};
+
+Berikut adalah plot distribusinya.
+
+\textgreater plot2d(r,v,a=150,b=200,c=0,d=190,bar=1,style=``\textbackslash/''):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-003.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-003.png}
+\end{figure}
+
+Kita bisa memasukkan data mentah tersebut ke dalam sebuah tabel.
+
+Tabel adalah metode untuk menyimpan data statistik. Tabel kita harus berisi tiga kolom: Awal jangkauan, akhir jangkauan, jumlah orang dalam jangkauan.
+
+Tabel dapat dicetak dengan header. Kami menggunakan vektor string untuk mengatur header.
+
+\textgreater T:=r{[}1:8{]}' \textbar{} r{[}2:9{]}' \textbar{} v'; writetable(T,labc={[}``from'',``to'',``count''{]})
+
+\begin{verbatim}
+      from        to     count
+     155.5     159.5        22
+     159.5     163.5        71
+     163.5     167.5       136
+     167.5     171.5       169
+     171.5     175.5       139
+     175.5     179.5        71
+     179.5     183.5        32
+     183.5     187.5         8
+\end{verbatim}
+
+Jika kita membutuhkan nilai rata-rata dan statistik lain dari ukuran, kita perlu menghitung titik tengah rentang. Kita dapat menggunakan dua kolom pertama dari tabel kita untuk ini.
+
+Sumbul ``\textbar{}'' digunakan untuk memisahkan kolom, fungsi ``writetable'' digunakan untuk menulis tabel, dengan opsion ``labc'' adalah untuk menentukan header kolom.
+
+\textgreater(T{[},1{]}+T{[},2{]})/2 // the midpoint of each interval
+
+\begin{verbatim}
+        157.5 
+        161.5 
+        165.5 
+        169.5 
+        173.5 
+        177.5 
+        181.5 
+        185.5 
+\end{verbatim}
+
+Tetapi lebih mudah, untuk melipat rentang dengan vektor {[}1/2.1/2{]}.
+
+\textgreater M=fold(r,{[}0.5,0.5{]})
+
+\begin{verbatim}
+[157.5,  161.5,  165.5,  169.5,  173.5,  177.5,  181.5,  185.5]
+\end{verbatim}
+
+Sekarang kita dapat menghitung rata-rata dan deviasi sampel dengan frekuensi yang diberikan.
+
+\textgreater\{m,d\}=meandev(M,v); m, d,
+
+\begin{verbatim}
+169.901234568
+5.98912964449
+\end{verbatim}
+
+Mari kita tambahkan distribusi normal dari nilai-nilai ke plot batang di atas. Rumus untuk distribusi normal dengan mean m dan standar deviasi d adalah:
+
+Karena nilainya antara 0 dan 1, untuk memplotnya pada bar plot harus dikalikan dengan 4 kali jumlah total data.
+
+\textgreater plot2d(``qnormal(x,m,d)*sum(v)*4'', \ldots{}\\
+\textgreater{} xmin=min(r),xmax=max(r),thickness=3,add=1):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-004.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-004.png}
+\end{figure}
+
+\chapter{Tabel}\label{tabel}
+
+Di direktori notebook ini Anda menemukan file dengan tabel. Data tersebut mewakili hasil survei. Berikut adalah empat baris pertama dari file tersebut. Data berasal dari buku online Jerman ``Einführung in die Statistik mit R'' oleh A. Handl.
+
+\textgreater printfile(``table.dat'',4);
+
+\begin{verbatim}
+Could not open the file
+table.dat
+for reading!
+Try "trace errors" to inspect local variables after errors.
+printfile:
+    open(filename,"r");
+\end{verbatim}
+
+Tabel berisi 7 kolom angka atau token (string). Kami ingin membaca tabel dari file. Pertama, kami menggunakan terjemahan kami sendiri untuk token.
+
+Untuk ini, kami mendefinisikan set token. Fungsi strtokens() mendapatkan vektor string token dari string yang diberikan.
+
+\textgreater mf:={[}``m'',``f''{]}; yn:={[}``y'',``n''{]}; ev:=strtokens(``g vg m b vb'');
+
+Sekarang kita membaca tabel dengan terjemahan ini.
+
+Argumen tok2, tok4 dll. adalah terjemahan dari kolom tabel. Argumen ini tidak ada dalam daftar parameter readtable(), jadi Anda harus menyediakannya dengan ``:=''.
+
+\textgreater\{MT,hd\}=readtable(``table.dat'',tok2:=mf,tok4:=yn,tok5:=ev,tok7:=yn);
+
+\begin{verbatim}
+Could not open the file
+table.dat
+for reading!
+Try "trace errors" to inspect local variables after errors.
+readtable:
+    if filename!=none then open(filename,"r"); endif;
+\end{verbatim}
+
+\textgreater load over statistics;
+
+Untuk mencetak, kita perlu menentukan set token yang sama. Kami mencetak empat baris pertama saja.
+
+\textgreater writetable(MT{[}1:4{]},labc=hd,wc=5,tok2:=mf,tok4:=yn,tok5:=ev,tok7:=yn);
+
+\begin{verbatim}
+MT is not a variable!
+Error in:
+writetable(MT[1:4],labc=hd,wc=5,tok2:=mf,tok4:=yn,tok5:=ev,tok ...
+                  ^
+\end{verbatim}
+
+Titik ``.'' mewakili nilai-nilai, yang tidak tersedia.
+
+Jika kita tidak ingin menentukan token untuk terjemahan terlebih dahulu, kita hanya perlu menentukan, kolom mana yang berisi token dan bukan angka.
+
+\textgreater ctok={[}2,4,5,7{]}; \{MT,hd,tok\}=readtable(``table.dat'',ctok=ctok);
+
+\begin{verbatim}
+Could not open the file
+table.dat
+for reading!
+Try "trace errors" to inspect local variables after errors.
+readtable:
+    if filename!=none then open(filename,"r"); endif;
+\end{verbatim}
+
+Fungsi readtable() sekarang mengembalikan satu set token.
+
+\textgreater tok
+
+\begin{verbatim}
+Variable tok not found!
+Error in:
+tok ...
+   ^
+\end{verbatim}
+
+Tabel berisi entri dari file dengan token yang diterjemahkan ke angka.
+
+String khusus NA=``.'' ditafsirkan sebagai ``Tidak Tersedia'', dan mendapatkan NAN (bukan angka) dalam tabel. Terjemahan ini dapat diubah dengan parameter NA, dan NAval.
+
+\textgreater MT{[}1{]}
+
+\begin{verbatim}
+MT is not a variable!
+Error in:
+MT[1] ...
+     ^
+\end{verbatim}
+
+Berikut isi tabel dengan angka yang belum diterjemahkan.
+
+\textgreater writetable(MT,wc=5)
+
+\begin{verbatim}
+Variable or function MT not found.
+Error in:
+writetable(MT,wc=5) ...
+             ^
+\end{verbatim}
+
+Untuk kenyamanan, Anda dapat memasukkan output readtable() ke dalam daftar.
+
+\textgreater Table=\{\{readtable(``table.dat'',ctok=ctok)\}\};
+
+\begin{verbatim}
+Could not open the file
+table.dat
+for reading!
+Try "trace errors" to inspect local variables after errors.
+readtable:
+    if filename!=none then open(filename,"r"); endif;
+\end{verbatim}
+
+Menggunakan kolom token yang sama dan token yang dibaca dari file, kita dapat mencetak tabel. Kita dapat menentukan ctok, tok, dll. Atau menggunakan daftar Tabel.
+
+\textgreater writetable(Table,ctok=ctok,wc=5);
+
+\begin{verbatim}
+Variable or function Table not found.
+Error in:
+writetable(Table,ctok=ctok,wc=5); ...
+                ^
+\end{verbatim}
+
+Fungsi tablecol() mengembalikan nilai kolom tabel, melewatkan setiap baris dengan nilai NAN(``.'' dalam file), dan indeks kolom, yang berisi nilai-nilai ini.
+
+\textgreater\{c,i\}=tablecol(MT,{[}5,6{]});
+
+\begin{verbatim}
+Variable or function MT not found.
+Error in:
+{c,i}=tablecol(MT,[5,6]); ...
+                 ^
+\end{verbatim}
+
+Kita dapat menggunakan ini untuk mengekstrak kolom dari tabel untuk tabel baru.
+
+\textgreater j={[}1,5,6{]}; writetable(MT{[}i,j{]},labc=hd{[}j{]},ctok={[}2{]},tok=tok)
+
+\begin{verbatim}
+Variable or function i not found.
+Error in:
+j=[1,5,6]; writetable(MT[i,j],labc=hd[j],ctok=[2],tok=tok) ...
+                          ^
+\end{verbatim}
+
+Tentu saja, kita perlu mengekstrak tabel itu sendiri dari daftar Tabel dalam kasus ini.
+
+\textgreater MT=Table{[}1{]};
+
+\begin{verbatim}
+Table is not a variable!
+Error in:
+MT=Table[1]; ...
+           ^
+\end{verbatim}
+
+Tentu saja, kita juga dapat menggunakannya untuk menentukan nilai rata-rata kolom atau nilai statistik lainnya.
+
+\textgreater mean(tablecol(MT,6))
+
+\begin{verbatim}
+Variable or function MT not found.
+Error in:
+mean(tablecol(MT,6)) ...
+                ^
+\end{verbatim}
+
+Fungsi getstatistics() mengembalikan elemen dalam vektor, dan jumlahnya. Kami menerapkannya pada nilai ``m'' dan ``f'' di kolom kedua tabel kami.
+
+\textgreater\{xu,count\}=getstatistics(tablecol(MT,2)); xu, count,
+
+\begin{verbatim}
+Variable or function MT not found.
+Error in:
+{xu,count}=getstatistics(tablecol(MT,2)); xu, count, ...
+                                    ^
+\end{verbatim}
+
+Kami dapat mencetak hasilnya dalam tabel baru.
+
+\textgreater writetable(count',labr=tok{[}xu{]})
+
+\begin{verbatim}
+Variable count not found!
+Error in:
+writetable(count',labr=tok[xu]) ...
+                 ^
+\end{verbatim}
+
+Fungsi selecttable() mengembalikan tabel baru dengan nilai dalam satu kolom yang dipilih dari vektor indeks. Pertama kita mencari indeks dari dua nilai kita di tabel token.
+
+\textgreater v:=indexof(tok,{[}``g'',``vg''{]})
+
+\begin{verbatim}
+Variable or function tok not found.
+Error in:
+v:=indexof(tok,["g","vg"]) ...
+              ^
+\end{verbatim}
+
+Sekarang kita dapat memilih baris tabel, yang memiliki salah satu nilai dalam v di baris ke-5.
+
+\textgreater MT1:=MT{[}selectrows(MT,5,v){]}; i:=sortedrows(MT1,5);
+
+\begin{verbatim}
+Variable or function MT not found.
+Error in:
+MT1:=MT[selectrows(MT,5,v)]; i:=sortedrows(MT1,5); ...
+                     ^
+\end{verbatim}
+
+Sekarang kita dapat mencetak tabel, dengan nilai yang diekstrak dan diurutkan di kolom ke-5.
+
+\textgreater writetable(MT1{[}i{]},labc=hd,ctok=ctok,tok=tok,wc=7);
+
+\begin{verbatim}
+Variable or function i not found.
+Error in:
+writetable(MT1[i],labc=hd,ctok=ctok,tok=tok,wc=7); ...
+                ^
+\end{verbatim}
+
+Untuk statistik berikutnya, kami ingin menghubungkan dua kolom tabel. Jadi kami mengekstrak kolom 2 dan 4 dan mengurutkan tabel.
+
+\textgreater i=sortedrows(MT,{[}2,4{]}); \ldots{}\\
+\textgreater{} writetable(tablecol(MT{[}i{]},{[}2,4{]})',ctok={[}1,2{]},tok=tok)
+
+\begin{verbatim}
+Variable or function MT not found.
+Error in:
+i=sortedrows(MT,[2,4]);    writetable(tablecol(MT[i],[2,4])',c ...
+               ^
+\end{verbatim}
+
+Dengan getstatistics(), kita juga dapat menghubungkan hitungan dalam dua kolom tabel satu sama lain.
+
+\textgreater MT24=tablecol(MT,{[}2,4{]}); \ldots{}\\
+\textgreater{} \{xu1,xu2,count\}=getstatistics(MT24{[}1{]},MT24{[}2{]}); \ldots{}\\
+\textgreater{} writetable(count,labr=tok{[}xu1{]},labc=tok{[}xu2{]})
+
+\begin{verbatim}
+Variable or function MT not found.
+Error in:
+MT24=tablecol(MT,[2,4]); {xu1,xu2,count}=getstatistics(MT24[1] ...
+                ^
+\end{verbatim}
+
+Sebuah tabel dapat ditulis ke file.
+
+\textgreater filename=``test.dat''; \ldots{}\\
+\textgreater{} writetable(count,labr=tok{[}xu1{]},labc=tok{[}xu2{]},file=filename);
+
+\begin{verbatim}
+Variable or function count not found.
+Error in:
+filename="test.dat"; writetable(count,labr=tok[xu1],labc=tok[x ...
+                                     ^
+\end{verbatim}
+
+Kemudian kita bisa membaca tabel dari file.
+
+\textgreater\{MT2,hd,tok2,hdr\}=readtable(filename,\textgreater clabs,\textgreater rlabs); \ldots{}\\
+\textgreater{} writetable(MT2,labr=hdr,labc=hd)
+
+\begin{verbatim}
+Could not open the file
+test.dat
+for reading!
+Try "trace errors" to inspect local variables after errors.
+readtable:
+    if filename!=none then open(filename,"r"); endif;
+\end{verbatim}
+
+Dan hapus filenya.
+
+\textgreater fileremove(filename);
+
+\chapter{Distribusi}\label{distribusi}
+
+Dengan plot2d, ada metode yang sangat mudah untuk memplot distribusi data eksperimen.
+
+\textgreater p=normal(1,1000); //1000 random normal-distributed sample p
+
+\textgreater plot2d(p,distribution=20,style=``\textbackslash/''); // plot the random sample p
+
+\textgreater plot2d(``qnormal(x,0,1)'',add=1): // add the standard normal distribution plot
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-005.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-005.png}
+\end{figure}
+
+Harap dicatat perbedaan antara plot batang (sampel) dan kurva normal (distribusi nyata). Masukkan kembali tiga perintah untuk melihat hasil pengambilan sampel lainnya.
+
+Berikut adalah perbandingan 10 simulasi 1000 nilai terdistribusi normal menggunakan apa yang disebut plot kotak. Plot ini menunjukkan median, kuartil 25\% dan 75\%, nilai minimal dan maksimal, dan outlier.
+
+\textgreater p=normal(10,1000); boxplot(p):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-006.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-006.png}
+\end{figure}
+
+Untuk menghasilkan bilangan bulat acak, Euler memiliki intrarandom. Mari kita simulasikan lemparan dadu dan plot distribusinya.
+
+Kami menggunakan fungsi getmultiplicities(v,x), yang menghitung seberapa sering elemen v muncul di x. Kemudian kita plot hasilnya menggunakan columnplot().
+
+\textgreater k=intrandom(1,6000,6); \ldots{}\\
+\textgreater{} columnsplot(getmultiplicities(1:6,k)); \ldots{}\\
+\textgreater{} ygrid(1000,color=red):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-007.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-007.png}
+\end{figure}
+
+Sementara intrandom(n,m,k) mengembalikan bilangan bulat terdistribusi seragam dari 1 ke k, dimungkinkan untuk menggunakan distribusi bilangan bulat lainnya dengan randpint().
+
+Dalam contoh berikut, probabilitas untuk 1,2,3 berturut-turut adalah 0,4,0,1,0,5.
+
+\textgreater randpint(1,1000,{[}0.4,0.1,0.5{]}); getmultiplicities(1:3,\%)
+
+\begin{verbatim}
+[378,  102,  520]
+\end{verbatim}
+
+Euler dapat menghasilkan nilai acak dari lebih banyak distribusi. Coba lihat referensinya.
+
+Misalnya, kami mencoba distribusi eksponensial. Sebuah variabel acak kontinu X dikatakan memiliki distribusi eksponensial, jika PDF-nya diberikan oleh
+
+\[f_X(x)=\lambda e^{-\lambda x},\quad x>0,\quad \lambda>0,\]
+
+with parameter
+
+\[\lambda=\frac{1}{\mu},\quad \mu \text{ is the mean, and denoted by } X \sim \text{Exponential}(\lambda).\]\textgreater plot2d(randexponential(1,1000,2),\textgreater distribution):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-010.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-010.png}
+\end{figure}
+
+Untuk banyak distribusi, Euler dapat menghitung fungsi distribusi dan kebalikannya.
+
+\textgreater plot2d(``normaldis'',-4,4):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-011.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-011.png}
+\end{figure}
+
+Berikut ini adalah salah satu cara untuk memplot kuantil.
+
+\textgreater plot2d(``qnormal(x,1,1.5)'',-4,6); \ldots{}\\
+\textgreater{} plot2d(``qnormal(x,1,1.5)'',a=2,b=5,\textgreater add,\textgreater filled):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-012.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-012.png}
+\end{figure}
+
+\[\text{normaldis(x,m,d)}=\int_{-\infty}^x \frac{1}{d\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{t-m}{d})^2}\ dt.\]
+
+Peluang berada di area hijau adalah sebagai berikut.
+
+\textgreater normaldis(5,1,1.5)-normaldis(2,1,1.5)
+
+\begin{verbatim}
+0.248662156979
+\end{verbatim}
+
+Ini dapat dihitung secara numerik dengan integral berikut.
+
+\[\int_2^5 \frac{1}{1.5\sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-1}{1.5})^2}\ dx.\]\textgreater gauss(``qnormal(x,1,1.5)'',2,5)
+
+\begin{verbatim}
+0.248662156979
+\end{verbatim}
+
+Mari kita bandingkan distribusi binomial dengan distribusi normal mean dan deviasi yang sama. Fungsi invbindis() memecahkan interpolasi linier antara nilai integer.
+
+\textgreater invbindis(0.95,1000,0.5), invnormaldis(0.95,500,0.5*sqrt(1000))
+
+\begin{verbatim}
+525.516721219
+526.007419394
+\end{verbatim}
+
+Fungsi qdis() adalah densitas dari distribusi chi-kuadrat. Seperti biasa, evolusi vektor ke fungsi ini. Dengan demikian kita mendapatkan plot semua distribusi chi-kuadrat dengan derajat 5 sampai 30 dengan mudah dengan cara berikut.
+
+\textgreater plot2d(``qchidis(x,(5:5:50)')'',0,50):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-015.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-015.png}
+\end{figure}
+
+Euler memiliki fungsi yang akurat untuk mengevaluasi distribusi. Mari kita periksa chidis() dengan integral.
+
+Penamaan mencoba untuk konsisten. Misalnya.,
+
+\begin{itemize}
+\item
+  distribusi chi-kuadrat adalah chidis(),
+\item
+  fungsi kebalikannya adalah invchidis(),
+\item
+  kepadatannya adalah qchidis().
+\end{itemize}
+
+Komplemen dari distribusi (ekor atas) adalah chicdis().
+
+\textgreater chidis(1.5,2), integrate(``qchidis(x,2)'',0,1.5)
+
+\begin{verbatim}
+0.527633447259
+0.527633447259
+\end{verbatim}
+
+\chapter{Distribusi Diskrit}\label{distribusi-diskrit}
+
+Untuk menentukan distribusi diskrit Anda sendiri, Anda dapat menggunakan metode berikut.
+
+Pertama kita atur fungsi distribusinya.
+
+\textgreater wd = 0\textbar((1:6)+{[}-0.01,0.01,0,0,0,0{]})/6
+
+\begin{verbatim}
+[0,  0.165,  0.335,  0.5,  0.666667,  0.833333,  1]
+\end{verbatim}
+
+Artinya dengan probabilitas wd{[}i+1{]}-wd{[}i{]} kita menghasilkan nilai acak i.
+
+Ini adalah distribusi yang hampir seragam. Mari kita mendefinisikan generator nomor acak untuk ini. Fungsi find(v,x) menemukan nilai x dalam vektor v. Fungsi ini juga berfungsi untuk vektor x.
+
+\textgreater function wrongdice (n,m) := find(wd,random(n,m))
+
+Kesalahannya sangat halus sehingga kita hanya melihatnya dengan sangat banyak iterasi.
+
+\textgreater columnsplot(getmultiplicities(1:6,wrongdice(1,1000000))):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-016.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-016.png}
+\end{figure}
+
+Berikut adalah fungsi sederhana untuk memeriksa distribusi seragam dari nilai 1\ldots K dalam v. Kami menerima hasilnya, jika untuk semua frekuensi
+
+\[\left|f_i-\frac{1}{K}\right| < \frac{\delta}{\sqrt{n}}.\]\textgreater function checkrandom (v, delta=1) \ldots{}
+
+\begin{verbatim}
+  K=max(v); n=cols(v);
+  fr=getfrequencies(v,1:K);
+  return max(fr/n-1/K)<delta/sqrt(n);
+  endfunction
+\end{verbatim}
+
+Memang fungsi menolak distribusi seragam.
+
+\textgreater checkrandom(wrongdice(1,1000000))
+
+\begin{verbatim}
+0
+\end{verbatim}
+
+Dan itu menerima generator acak bawaan.
+
+\textgreater checkrandom(intrandom(1,1000000,6))
+
+\begin{verbatim}
+1
+\end{verbatim}
+
+Kita dapat menghitung distribusi binomial. Pertama ada binomialsum(), yang mengembalikan probabilitas i atau kurang hit dari n percobaan.
+
+\textgreater bindis(410,1000,0.4)
+
+\begin{verbatim}
+0.751401349654
+\end{verbatim}
+
+Fungsi Beta terbalik digunakan untuk menghitung interval kepercayaan Clopper-Pearson untuk parameter p.~Tingkat default adalah alfa.
+
+Arti interval ini adalah jika p berada di luar interval, hasil pengamatan 410 dalam 1000 jarang terjadi.
+
+\textgreater clopperpearson(410,1000)
+
+\begin{verbatim}
+[0.37932,  0.441212]
+\end{verbatim}
+
+Perintah berikut adalah cara langsung untuk mendapatkan hasil di atas. Tetapi untuk n besar, penjumlahan langsung tidak akurat dan lambat.
+
+\textgreater p=0.4; i=0:410; n=1000; sum(bin(n,i)*p\textsuperscript{i*(1-p)}(n-i))
+
+\begin{verbatim}
+0.751401349655
+\end{verbatim}
+
+Omong-omong, invbinsum() menghitung kebalikan dari binomialsum().
+
+\textgreater invbindis(0.75,1000,0.4)
+
+\begin{verbatim}
+409.932733047
+\end{verbatim}
+
+Di Bridge, kami mengasumsikan 5 kartu yang beredar (dari 52) di dua tangan (26 kartu). Mari kita hitung probabilitas distribusi yang lebih buruk dari 3:2 (misalnya 0:5, 1:4, 4:1 atau 5:0).
+
+\textgreater2*hypergeomsum(1,5,13,26)
+
+\begin{verbatim}
+0.321739130435
+\end{verbatim}
+
+Ada juga simulasi distribusi multinomial.
+
+\textgreater randmultinomial(10,1000,{[}0.4,0.1,0.5{]})
+
+\begin{verbatim}
+          376            91           533 
+          417            80           503 
+          440            94           466 
+          406           112           482 
+          408            94           498 
+          395           107           498 
+          399            96           505 
+          428            87           485 
+          400            99           501 
+          373           109           518 
+\end{verbatim}
+
+\chapter{Merencanakan Data}\label{merencanakan-data}
+
+Untuk plot data, kami mencoba hasil pemilu Jerman sejak tahun 1990, diukur dalam kursi.
+
+\textgreater BW := {[} \ldots{}\\
+\textgreater{} 1990,662,319,239,79,8,17; \ldots{}\\
+\textgreater{} 1994,672,294,252,47,49,30; \ldots{}\\
+\textgreater{} 1998,669,245,298,43,47,36; \ldots{}\\
+\textgreater{} 2002,603,248,251,47,55,2; \ldots{}\\
+\textgreater{} 2005,614,226,222,61,51,54; \ldots{}\\
+\textgreater{} 2009,622,239,146,93,68,76; \ldots{}\\
+\textgreater{} 2013,631,311,193,0,63,64{]};
+
+Untuk para pihak, kami menggunakan serangkaian nama.
+
+\textgreater P:={[}``CDU/CSU'',``SPD'',``FDP'',``Gr'',``Li''{]};
+
+Mari kita mencetak persentase dengan baik.
+
+Pertama kita ekstrak kolom yang diperlukan. Kolom 3 sampai 7 adalah kursi masing-masing partai, dan kolom 2 adalah jumlah kursi. kolom 1 adalah tahun pemilihan.
+
+\textgreater BT:=BW{[},3:7{]}; BT:=BT/sum(BT); YT:=BW{[},1{]}';
+
+Kemudian kami mencetak statistik dalam bentuk tabel. Kami menggunakan nama sebagai tajuk kolom, dan tahun sebagai tajuk untuk baris. Lebar default untuk kolom adalah wc=10, tetapi kami lebih memilih output yang lebih padat. Kolom akan diperluas untuk label kolom, jika perlu.
+
+\textgreater writetable(BT*100,wc=6,dc=0,\textgreater fixed,labc=P,labr=YT)
+
+\begin{verbatim}
+       CDU/CSU   SPD   FDP    Gr    Li
+  1990      48    36    12     1     3
+  1994      44    38     7     7     4
+  1998      37    45     6     7     5
+  2002      41    42     8     9     0
+  2005      37    36    10     8     9
+  2009      38    23    15    11    12
+  2013      49    31     0    10    10
+\end{verbatim}
+
+Perkalian matriks berikut mengekstrak jumlah persentase dua partai besar yang menunjukkan bahwa partai-partai kecil telah memperoleh rekaman di parlemen hingga 2009.
+
+\textgreater BT1:=(BT.{[}1;1;0;0;0{]})'*100
+
+\begin{verbatim}
+[84.29,  81.25,  81.1659,  82.7529,  72.9642,  61.8971,  79.8732]
+\end{verbatim}
+
+Ada juga plot statistik sederhana. Kami menggunakannya untuk menampilkan garis dan titik secara bersamaan. Alternatifnya adalah memanggil plot2d dua kali dengan \textgreater add.
+
+\textgreater statplot(YT,BT1,``b''):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-018.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-018.png}
+\end{figure}
+
+Tentukan beberapa warna untuk masing-masing pihak.
+
+\textgreater CP:={[}rgb(0.5,0.5,0.5),red,yellow,green,rgb(0.8,0,0){]};
+
+Sekarang kita dapat memplot hasil pemilu 2009 dan perubahannya menjadi satu plot menggunakan gambar. Kita dapat menambahkan vektor kolom ke setiap plot.
+
+\textgreater figure(2,1); \ldots{}\\
+\textgreater{} figure(1); columnsplot(BW{[}6,3:7{]},P,color=CP); \ldots{}\\
+\textgreater{} figure(2); columnsplot(BW{[}6,3:7{]}-BW{[}5,3:7{]},P,color=CP); \ldots{}\\
+\textgreater{} figure(0):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-019.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-019.png}
+\end{figure}
+
+Plot data menggabungkan deretan data statistik dalam satu plot.
+
+\textgreater J:=BW{[},1{]}`; DP:=BW{[},3:7{]}'; \ldots{}\\
+\textgreater{} dataplot(YT,BT',color=CP); \ldots{}\\
+\textgreater{} labelbox(P,colors=CP,styles=``{[}{]}'',\textgreater points,w=0.2,x=0.3,y=0.4):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-020.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-020.png}
+\end{figure}
+
+Sebuah kolom plot 3D menunjukkan baris data statistik dalam bentuk kolom. Kami menyediakan label untuk baris dan kolom. angle adalah sudut pandang.
+
+\textgreater columnsplot3d(BT,scols=P,srows=YT, \ldots{}\\
+\textgreater{} angle=30°,ccols=CP):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-021.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-021.png}
+\end{figure}
+
+Representasi lain adalah plot mosaik. Perhatikan bahwa kolom plot mewakili kolom matriks di sini. Karena panjangnya label CDU/CSU, kami mengambil jendela yang lebih kecil dari biasanya.
+
+\textgreater shrinkwindow(\textgreater smaller); \ldots{}\\
+\textgreater{} mosaicplot(BT',srows=YT,scols=P,color=CP,style=``\#''); \ldots{}\\
+\textgreater{} shrinkwindow():
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-022.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-022.png}
+\end{figure}
+
+Kita juga bisa membuat diagram lingkaran. Karena hitam dan kuning membentuk koalisi, kami menyusun ulang elemen-elemennya.
+
+\textgreater i={[}1,3,5,4,2{]}; piechart(BW{[}6,3:7{]}{[}i{]},color=CP{[}i{]},lab=P{[}i{]}):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-023.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-023.png}
+\end{figure}
+
+Berikut adalah jenis plot lainnya.
+
+\textgreater starplot(normal(1,10)+4,lab=1:10,\textgreater rays):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-024.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-024.png}
+\end{figure}
+
+Beberapa plot di plot2d bagus untuk statika. Berikut adalah plot impuls dari data acak, terdistribusi secara merata di {[}0,1{]}.
+
+\textgreater plot2d(makeimpulse(1:10,random(1,10)),\textgreater bar):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-025.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-025.png}
+\end{figure}
+
+Tetapi untuk data yang terdistribusi secara eksponensial, kita mungkin memerlukan plot logaritmik.
+
+\textgreater logimpulseplot(1:10,-log(random(1,10))*10):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-026.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-026.png}
+\end{figure}
+
+Fungsi columnplot() lebih mudah digunakan, karena hanya membutuhkan vektor nilai. Selain itu, ia dapat mengatur labelnya ke apa pun yang kita inginkan, kita sudah mendemonstrasikannya dalam tutorial ini.
+
+Ini adalah aplikasi lain, di mana kita menghitung karakter dalam sebuah kalimat dan menyusun statistik.
+
+\textgreater v=strtochar(``the quick brown fox jumps over the lazy dog''); \ldots{}\\
+\textgreater{} w=ascii(``a''):ascii(``z''); x=getmultiplicities(w,v); \ldots{}\\
+\textgreater{} cw={[}{]}; for k=w; cw=cw\textbar char(k); end; \ldots{}\\
+\textgreater{} columnsplot(x,lab=cw,width=0.05):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-027.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-027.png}
+\end{figure}
+
+Dimungkinkan juga untuk mengatur sumbu secara manual.
+
+\textgreater n=10; p=0.4; i=0:n; x=bin(n,i)*p\textsuperscript{i*(1-p)}(n-i); \ldots{}\\
+\textgreater{} columnsplot(x,lab=i,width=0.05,\textless frame,\textless grid); \ldots{}\\
+\textgreater{} yaxis(0,0:0.1:1,style=``-\textgreater{}'',\textgreater left); xaxis(0,style=``.''); \ldots{}\\
+\textgreater{} label(``p'',0,0.25), label(``i'',11,0); \ldots{}\\
+\textgreater{} textbox({[}``Binomial distribution'',``with p=0.4''{]}):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-028.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-028.png}
+\end{figure}
+
+Berikut ini adalah cara untuk memplot frekuensi bilangan dalam sebuah vektor.
+
+Kami membuat vektor bilangan bulat bilangan acak 1 hingga 6.
+
+\textgreater v:=intrandom(1,10,10)
+
+\begin{verbatim}
+[8,  4,  1,  8,  5,  10,  2,  10,  2,  5]
+\end{verbatim}
+
+Kemudian ekstrak nomor unik di v.
+
+\textgreater vu:=unique(v)
+
+\begin{verbatim}
+[1,  2,  4,  5,  8,  10]
+\end{verbatim}
+
+Dan plot frekuensi dalam plot kolom.
+
+\textgreater columnsplot(getmultiplicities(vu,v),lab=vu,style=``/''):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-029.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-029.png}
+\end{figure}
+
+Kami ingin menunjukkan fungsi untuk distribusi nilai empiris.
+
+\textgreater x=normal(1,20);
+
+Fungsi empdist(x,vs) membutuhkan array nilai yang diurutkan. Jadi kita harus mengurutkan x sebelum kita dapat menggunakannya.
+
+\textgreater xs=sort(x);
+
+Kemudian kami memplot distribusi empiris dan beberapa batang kepadatan menjadi satu plot. Alih-alih plot bar untuk distribusi, kami menggunakan plot gigi gergaji kali ini.
+
+\textgreater figure(2,1); \ldots{}\\
+\textgreater{} figure(1); plot2d(``empdist'',-4,4;xs); \ldots{}\\
+\textgreater{} figure(2); plot2d(histo(x,v=-4:0.2:4,\textless bar)); \ldots{}\\
+\textgreater{} figure(0):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-030.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-030.png}
+\end{figure}
+
+Plot pencar mudah dilakukan di Euler dengan plot titik biasa. Grafik berikut menunjukkan bahwa X dan X+Y jelas berkorelasi positif.
+
+\textgreater x=normal(1,100); plot2d(x,x+rotright(x),\textgreater points,style=``..''):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-031.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-031.png}
+\end{figure}
+
+Seringkali, kita ingin membandingkan dua sampel dari distribusi yang berbeda. Ini dapat dilakukan dengan plot kuantil-kuantil.
+
+Untuk pengujian, kami mencoba distribusi student-t dan distribusi eksponensial.
+
+\textgreater x=randt(1,1000,5); y=randnormal(1,1000,mean(x),dev(x)); \ldots{}\\
+\textgreater{} plot2d(``x'',r=6,style=``--'',yl=``normal'',xl=``student-t'',\textgreater vertical); \ldots{}\\
+\textgreater{} plot2d(sort(x),sort(y),\textgreater points,color=red,style=``x'',\textgreater add):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-032.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-032.png}
+\end{figure}
+
+Plot dengan jelas menunjukkan bahwa nilai terdistribusi normal cenderung lebih kecil di ujung ekstrim.
+
+Jika kita memiliki dua distribusi dengan ukuran yang berbeda, kita dapat memperluas yang lebih kecil atau mengecilkan yang lebih besar. Fungsi berikut baik untuk keduanya. Dibutuhkan nilai median dengan persentase antara 0 dan 1.
+
+\textgreater function medianexpand (x,n) := median(x,p=linspace(0,1,n-1));
+
+Mari kita bandingkan dua distribusi yang sama.
+
+\textgreater x=random(1000); y=random(400); \ldots{}\\
+\textgreater{} plot2d(``x'',0,1,style=``--''); \ldots{}\\
+\textgreater{} plot2d(sort(medianexpand(x,400)),sort(y),\textgreater points,color=red,style=``x'',\textgreater add):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-033.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-033.png}
+\end{figure}
+
+\chapter{Regresi dan Korelasi}\label{regresi-dan-korelasi}
+
+Regresi linier dapat dilakukan dengan fungsi polyfit() atau berbagai fungsi fit.
+
+Sebagai permulaan, kami menemukan garis regresi untuk data univariat dengan polifit(x,y,1).
+
+\textgreater x=1:10; y={[}2,3,1,5,6,3,7,8,9,8{]}; writetable(x'\textbar y',labc={[}``x'',``y''{]})
+
+\begin{verbatim}
+         x         y
+         1         2
+         2         3
+         3         1
+         4         5
+         5         6
+         6         3
+         7         7
+         8         8
+         9         9
+        10         8
+\end{verbatim}
+
+Kami ingin membandingkan non-weighted dan weighted fit. Pertama, koefisien kecocokan linier.
+
+\textgreater p=polyfit(x,y,1)
+
+\begin{verbatim}
+[0.733333,  0.812121]
+\end{verbatim}
+
+Sekarang koefisien dengan bobot yang menekankan nilai terakhir.
+
+\textgreater w \&= ``exp(-(x-10)\^{}2/10)''; pw=polyfit(x,y,1,w=w(x))
+
+\begin{verbatim}
+[4.71566,  0.38319]
+\end{verbatim}
+
+Kami memasukkan semuanya ke dalam satu plot untuk titik dan garis regresi, dan untuk bobot yang digunakan.
+
+\textgreater figure(2,1); \ldots{}\\
+\textgreater{} figure(1); statplot(x,y,``b'',xl=``Regression''); \ldots{}\\
+\textgreater{} plot2d(``evalpoly(x,p)'',\textgreater add,color=blue,style=``--''); \ldots{}\\
+\textgreater{} plot2d(``evalpoly(x,pw)'',5,10,\textgreater add,color=red,style=``--''); \ldots{}\\
+\textgreater{} figure(2); plot2d(w,1,10,\textgreater filled,style=``/'',fillcolor=red,xl=w); \ldots{}\\
+\textgreater{} figure(0):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-034.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-034.png}
+\end{figure}
+
+Sebagai contoh lain kita membaca survei siswa, usia mereka, usia orang tua mereka dan jumlah saudara kandung dari sebuah file.
+
+Tabel ini berisi ``m'' dan ``f'' di kolom kedua. Kami menggunakan variabel tok2 untuk mengatur terjemahan yang tepat daripada membiarkan readtable() mengumpulkan terjemahan.
+
+\textgreater\{MS,hd\}:=readtable(``table1.dat'',tok2:={[}``m'',``f''{]}); \ldots{}\\
+\textgreater{} writetable(MS,labc=hd,tok2:={[}``m'',``f''{]});
+
+\begin{verbatim}
+Could not open the file
+table1.dat
+for reading!
+Try "trace errors" to inspect local variables after errors.
+readtable:
+    if filename!=none then open(filename,"r"); endif;
+\end{verbatim}
+
+Bagaimana usia bergantung satu sama lain? Kesan pertama datang dari scatterplot berpasangan.
+
+\textgreater scatterplots(tablecol(MS,3:5),hd{[}3:5{]}):
+
+\begin{verbatim}
+Variable or function MS not found.
+Error in:
+scatterplots(tablecol(MS,3:5),hd[3:5]): ...
+                        ^
+\end{verbatim}
+
+Jelas bahwa usia ayah dan ibu bergantung satu sama lain. Mari kita tentukan dan plot garis regresinya.
+
+\textgreater cs:=MS{[},4:5{]}'; ps:=polyfit(cs{[}1{]},cs{[}2{]},1)
+
+\begin{verbatim}
+MS is not a variable!
+Error in:
+cs:=MS[,4:5]'; ps:=polyfit(cs[1],cs[2],1) ...
+            ^
+\end{verbatim}
+
+Ini jelas model yang salah. Garis regresinya adalah s=17+0,74t, di mana t adalah usia ibu dan s usia ayah. Perbedaan usia mungkin sedikit bergantung pada usia, tetapi tidak terlalu banyak.
+
+Sebaliknya, kami menduga fungsi seperti s=a+t. Maka a adalah mean dari s-t. Ini adalah perbedaan usia rata-rata antara ayah dan ibu.
+
+\textgreater da:=mean(cs{[}2{]}-cs{[}1{]})
+
+\begin{verbatim}
+cs is not a variable!
+Error in:
+da:=mean(cs[2]-cs[1]) ...
+              ^
+\end{verbatim}
+
+Mari kita plot ini menjadi satu plot pencar.
+
+\textgreater plot2d(cs{[}1{]},cs{[}2{]},\textgreater points); \ldots{}\\
+\textgreater{} plot2d(``evalpoly(x,ps)'',color=red,style=``.'',\textgreater add); \ldots{}\\
+\textgreater{} plot2d(``x+da'',color=blue,\textgreater add):
+
+\begin{verbatim}
+cs is not a variable!
+Error in:
+plot2d(cs[1],cs[2],&gt;points);  plot2d("evalpoly(x,ps)",color=re ...
+            ^
+\end{verbatim}
+
+Berikut adalah plot kotak dari dua zaman. Ini hanya menunjukkan, bahwa usianya berbeda.
+
+\textgreater boxplot(cs,{[}``mothers'',``fathers''{]}):
+
+\begin{verbatim}
+Variable or function cs not found.
+Error in:
+boxplot(cs,["mothers","fathers"]): ...
+          ^
+\end{verbatim}
+
+Sangat menarik bahwa perbedaan median tidak sebesar perbedaan rata-rata.
+
+\textgreater median(cs{[}2{]})-median(cs{[}1{]})
+
+\begin{verbatim}
+cs is not a variable!
+Error in:
+median(cs[2])-median(cs[1]) ...
+            ^
+\end{verbatim}
+
+Koefisien korelasi menunjukkan korelasi positif.
+
+\textgreater correl(cs{[}1{]},cs{[}2{]})
+
+\begin{verbatim}
+cs is not a variable!
+Error in:
+correl(cs[1],cs[2]) ...
+            ^
+\end{verbatim}
+
+Korelasi peringkat adalah ukuran untuk urutan yang sama di kedua vektor. Ini juga cukup positif.
+
+\textgreater rankcorrel(cs{[}1{]},cs{[}2{]})
+
+\begin{verbatim}
+cs is not a variable!
+Error in:
+rankcorrel(cs[1],cs[2]) ...
+                ^
+\end{verbatim}
+
+\chapter{Membuat Fungsi baru}\label{membuat-fungsi-baru}
+
+Tentu saja, bahasa EMT dapat digunakan untuk memprogram fungsi-fungsi baru. Misalnya, kita mendefinisikan fungsi skewness.
+
+dimana m adalah mean dari x.
+
+\textgreater function skew (x:vector) \ldots{}
+
+\begin{verbatim}
+m=mean(x);
+return sqrt(cols(x))*sum((x-m)^3)/(sum((x-m)^2))^(3/2);
+endfunction
+\end{verbatim}
+
+Seperti yang Anda lihat, kita dapat dengan mudah menggunakan bahasa matriks untuk mendapatkan implementasi yang sangat singkat dan efisien. Mari kita coba fungsi ini.
+
+\textgreater data=normal(20); skew(normal(10))
+
+\begin{verbatim}
+0.479209399762
+\end{verbatim}
+
+Berikut adalah fungsi lain, yang disebut koefisien skewness Pearson.
+
+\textgreater function skew1 (x) := 3*(mean(x)-median(x))/dev(x)
+
+\textgreater skew1(data)
+
+\begin{verbatim}
+-0.241875313184
+\end{verbatim}
+
+\chapter{Simulasi Monte Carlo}\label{simulasi-monte-carlo}
+
+Euler dapat digunakan untuk mensimulasikan kejadian acak. Kita telah melihat contoh sederhana di atas. Ini adalah satu lagi, yang mensimulasikan 1000 kali 3 lemparan dadu, dan meminta distribusi jumlah.
+
+\textgreater ds:=sum(intrandom(1000,3,6))'; fs=getmultiplicities(3:18,ds)
+
+\begin{verbatim}
+[5,  13,  32,  40,  69,  108,  130,  123,  139,  115,  92,  66,  34,
+23,  8,  3]
+\end{verbatim}
+
+kita bisa membuat plot ini sekarang
+
+\textgreater columnsplot(fs,lab=3:18):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-035.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-035.png}
+\end{figure}
+
+Untuk menentukan distribusi yang diharapkan tidak begitu mudah. Kami menggunakan rekursi lanjutan untuk ini.
+
+Fungsi berikut menghitung banyaknya cara bilangan k dapat direpresentasikan sebagai jumlah n bilangan dalam rentang 1 sampai m. Ia bekerja secara rekursif dengan cara yang jelas.
+
+\textgreater function map countways (k; n, m) \ldots{}
+
+\begin{verbatim}
+  if n==1 then return k>=1 && k<=m
+  else
+    sum=0; 
+    loop 1 to m; sum=sum+countways(k-#,n-1,m); end;
+    return sum;
+  end;
+endfunction
+\end{verbatim}
+
+Berikut adalah hasil dari tiga lemparan dadu.
+
+\textgreater cw=countways(3:18,3,6)
+
+\begin{verbatim}
+[1,  3,  6,  10,  15,  21,  25,  27,  27,  25,  21,  15,  10,  6,  3,
+1]
+\end{verbatim}
+
+Kami menambahkan nilai yang diharapkan ke plot.
+
+\textgreater plot2d(cw/6\^{}3*1000,\textgreater add); plot2d(cw/6\^{}3*1000,\textgreater points,\textgreater add):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-036.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-036.png}
+\end{figure}
+
+Untuk simulasi lain, simpangan nilai rata-rata dari n 0-1-variabel acak terdistribusi normal adalah 1/sqrt(n).
+
+\textgreater longformat; 1/sqrt(10)
+
+\begin{verbatim}
+0.316227766017
+\end{verbatim}
+
+Mari kita periksa ini dengan simulasi. Kami memproduksi 10000 kali 10 vektor acak.
+
+\textgreater M=normal(10000,10); dev(mean(M)')
+
+\begin{verbatim}
+0.318932043078
+\end{verbatim}
+
+\textgreater plot2d(mean(M)',\textgreater distribution):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-037.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-037.png}
+\end{figure}
+
+Median 10 0-1-bilangan acak terdistribusi normal memiliki simpangan yang lebih besar.
+
+\textgreater dev(median(M)')
+
+\begin{verbatim}
+0.376712244247
+\end{verbatim}
+
+Karena kita dapat dengan mudah menghasilkan jalan acak, kita dapat mensimulasikan proses Wiener. Kami mengambil 1000 langkah dari 1000 proses. Kami kemudian memplot deviasi standar dan rata-rata dari langkah ke-n dari proses ini bersama dengan nilai yang diharapkan dalam warna merah.
+
+\textgreater n=1000; m=1000; M=cumsum(normal(n,m)/sqrt(m)); \ldots{}\\
+\textgreater{} t=(1:n)/n; figure(2,1); \ldots{}\\
+\textgreater{} figure(1); plot2d(t,mean(M')`); plot2d(t,0,color=red,\textgreater add); \ldots{}\\
+\textgreater{} figure(2); plot2d(t,dev(M')'); plot2d(t,sqrt(t),color=red,\textgreater add); \ldots{}\\
+\textgreater{} figure(0):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-038.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-038.png}
+\end{figure}
+
+\chapter{Uji}\label{uji}
+
+Uji adalah alat penting dalam statistik. Di Euler, banyak tes diimplementasikan. Semua tes ini mengembalikan kesalahan yang kami terima jika kami menolak hipotesis nol.
+
+Sebagai contoh, kami menguji lemparan dadu untuk distribusi seragam. Pada 600 lemparan, kami mendapatkan nilai berikut, yang kami masukkan ke dalam uji chi-kuadrat.
+
+\textgreater chitest({[}90,103,114,101,103,89{]},dup(100,6)')
+
+\begin{verbatim}
+0.498830517952
+\end{verbatim}
+
+Tes chi-kuadrat juga memiliki mode, yang menggunakan simulasi Monte Carlo untuk menguji statistik. Hasilnya harus hampir sama. Parameter \textgreater p menginterpretasikan vektor-y sebagai vektor probabilitas.
+
+\textgreater chitest({[}90,103,114,101,103,89{]},dup(1/6,6)',\textgreater p,\textgreater montecarlo)
+
+\begin{verbatim}
+0.492
+\end{verbatim}
+
+Kesalahan ini terlalu besar. Jadi kita tidak bisa menolak distribusi seragam. Ini tidak membuktikan bahwa dadu kami adil. Tapi kita tidak bisa menolak hipotesis kita.
+
+Selanjutnya kita menghasilkan 1000 lemparan dadu menggunakan generator angka acak, dan melakukan tes yang sama.
+
+\textgreater n=1000; t=random({[}1,n*6{]}); chitest(count(t*6,6),dup(n,6)')
+
+\begin{verbatim}
+0.254801014515
+\end{verbatim}
+
+Mari kita uji nilai rata-rata 100 dengan uji-t.
+
+\textgreater s=200+normal({[}1,100{]})*10; \ldots{}\\
+\textgreater{} ttest(mean(s),dev(s),100,200)
+
+\begin{verbatim}
+0.27961149542
+\end{verbatim}
+
+Fungsi ttest() membutuhkan nilai rata-rata, simpangan, jumlah data, dan nilai rata-rata yang akan diuji.
+
+Sekarang mari kita periksa dua pengukuran untuk mean yang sama. Kami menolak hipotesis bahwa mereka memiliki rata-rata yang sama, jika hasilnya \textless0,05.
+
+\textgreater tcomparedata(normal(1,10),normal(1,10))
+
+\begin{verbatim}
+0.0972316266208
+\end{verbatim}
+
+Jika kita menambahkan bias ke satu distribusi, kita mendapatkan lebih banyak penolakan. Ulangi simulasi ini beberapa kali untuk melihat efeknya.
+
+\textgreater tcomparedata(normal(1,10),normal(1,10)+2)
+
+\begin{verbatim}
+6.54093758712e-07
+\end{verbatim}
+
+Pada contoh berikutnya, kita menghasilkan 20 lemparan dadu acak sebanyak 100 kali dan menghitung yang ada di dalamnya. Harus ada 20/6=3,3 yang rata-rata.
+
+\textgreater R=random(100,20); R=sum(R*6\textless=1)'; mean(R)
+
+\begin{verbatim}
+3.17
+\end{verbatim}
+
+Kami sekarang membandingkan jumlah satu dengan distribusi binomial. Pertama kita plot distribusi yang.
+
+\textgreater plot2d(R,distribution=max(R)+1,even=1,style=``\textbackslash/''):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-039.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-039.png}
+\end{figure}
+
+\textgreater t=count(R,21);
+
+Kemudian kami menghitung nilai yang diharapkan.
+
+\textgreater n=0:20; b=bin(20,n)*(1/6)\textsuperscript{n*(5/6)}(20-n)*100;
+
+Kita harus mengumpulkan beberapa angka untuk mendapatkan kategori yang cukup besar.
+
+\textgreater t1=sum(t{[}1:2{]})\textbar t{[}3:7{]}\textbar sum(t{[}8:21{]}); \ldots{}\\
+\textgreater{} b1=sum(b{[}1:2{]})\textbar b{[}3:7{]}\textbar sum(b{[}8:21{]});
+
+Uji chi-kuadrat menolak hipotesis bahwa distribusi kami adalah distribusi binomial, jika hasilnya \textless0,05.
+
+\textgreater chitest(t1,b1)
+
+\begin{verbatim}
+0.568502742036
+\end{verbatim}
+
+Contoh berikut berisi hasil dua kelompok orang (laki-laki dan perempuan, katakanlah) memberikan suara untuk satu dari enam partai.
+
+\textgreater A={[}23,37,43,52,64,74;27,39,41,49,63,76{]}; \ldots{}\\
+\textgreater{} writetable(A,wc=6,labr={[}``m'',``f''{]},labc=1:6)
+
+\begin{verbatim}
+           1     2     3     4     5     6
+     m    23    37    43    52    64    74
+     f    27    39    41    49    63    76
+\end{verbatim}
+
+Kami ingin menguji independensi suara dari jenis kelamin. Tes tabel chi\^{}2 melakukan ini. Akibatnya terlalu besar untuk menolak kemerdekaan. Jadi kita tidak bisa mengatakan, jika voting tergantung pada jenis kelamin dari data ini.
+
+\textgreater tabletest(A)
+
+\begin{verbatim}
+0.990701632326
+\end{verbatim}
+
+Berikut ini adalah tabel yang diharapkan, jika kita mengasumsikan frekuensi pemungutan suara yang diamati.
+
+\textgreater writetable(expectedtable(A),wc=6,dc=1,labr={[}``m'',``f''{]},labc=1:6)
+
+\begin{verbatim}
+           1     2     3     4     5     6
+     m  24.9  37.9  41.9  50.3  63.3  74.7
+     f  25.1  38.1  42.1  50.7  63.7  75.3
+\end{verbatim}
+
+Kita dapat menghitung koefisien kontingensi yang dikoreksi. Karena sangat dekat dengan 0, kami menyimpulkan bahwa pemungutan suara tidak tergantung pada jenis kelamin.
+
+\textgreater contingency(A)
+
+\begin{verbatim}
+0.0427225484717
+\end{verbatim}
+
+\chapter{Uji Lainnya}\label{uji-lainnya}
+
+Selanjutnya kami menggunakan analisis varians (Uji-F) untuk menguji tiga sampel data yang terdistribusi normal untuk nilai rata-rata yang sama. Metode tersebut disebut ANOVA (analisis varians). Di Euler, fungsi varanalysis() digunakan.
+
+\textgreater x1={[}109,111,98,119,91,118,109,99,115,109,94{]}; mean(x1),
+
+\begin{verbatim}
+106.545454545
+\end{verbatim}
+
+\textgreater x2={[}120,124,115,139,114,110,113,120,117{]}; mean(x2),
+
+\begin{verbatim}
+119.111111111
+\end{verbatim}
+
+\textgreater x3={[}120,112,115,110,105,134,105,130,121,111{]}; mean(x3)
+
+\begin{verbatim}
+116.3
+\end{verbatim}
+
+\textgreater varanalysis(x1,x2,x3)
+
+\begin{verbatim}
+0.0138048221371
+\end{verbatim}
+
+Ini berarti, kami menolak hipotesis nilai rata-rata yang sama. Kami melakukan ini dengan probabilitas kesalahan 1,3\%.
+
+Ada juga uji median, yang menolak sampel data dengan distribusi rata-rata berbeda menguji median sampel bersatu.
+
+\textgreater a={[}56,66,68,49,61,53,45,58,54{]};
+
+\textgreater b={[}72,81,51,73,69,78,59,67,65,71,68,71{]};
+
+\textgreater mediantest(a,b)
+
+\begin{verbatim}
+0.0241724220052
+\end{verbatim}
+
+Tes lain tentang kesetaraan adalah tes peringkat. Ini jauh lebih tajam daripada tes median.
+
+\textgreater ranktest(a,b)
+
+\begin{verbatim}
+0.00199969612469
+\end{verbatim}
+
+Dalam contoh berikut, kedua distribusi memiliki mean yang sama.
+
+\textgreater ranktest(random(1,100),random(1,50)*3-1)
+
+\begin{verbatim}
+0.453978735731
+\end{verbatim}
+
+Sekarang mari kita coba mensimulasikan dua perlakuan a dan b yang diterapkan pada orang yang berbeda.
+
+\textgreater a={[}8.0,7.4,5.9,9.4,8.6,8.2,7.6,8.1,6.2,8.9{]};
+
+\textgreater b={[}6.8,7.1,6.8,8.3,7.9,7.2,7.4,6.8,6.8,8.1{]};
+
+Tes signum memutuskan, jika a lebih baik dari b.
+
+\textgreater signtest(a,b)
+
+\begin{verbatim}
+0.0546875
+\end{verbatim}
+
+Ini terlalu banyak kesalahan. Kita tidak dapat menolak bahwa a sama baiknya dengan b.
+
+Tes Wilcoxon lebih tajam dari tes ini, tetapi bergantung pada nilai kuantitatif perbedaan.
+
+\textgreater wilcoxon(a,b)
+
+\begin{verbatim}
+0.0296680599405
+\end{verbatim}
+
+Mari kita coba dua tes lagi menggunakan seri yang dihasilkan.
+
+\textgreater wilcoxon(normal(1,20),normal(1,20)-1)
+
+\begin{verbatim}
+0.13136112342
+\end{verbatim}
+
+\textgreater wilcoxon(normal(1,20),normal(1,20))
+
+\begin{verbatim}
+0.195266435017
+\end{verbatim}
+
+\chapter{Nomor Acak}\label{nomor-acak}
+
+Berikut ini adalah pengujian untuk pembangkit bilangan acak. Euler menggunakan generator yang sangat bagus, jadi kita tidak perlu mengharapkan masalah.
+
+Pertama kita menghasilkan sepuluh juta angka acak di {[}0,1{]}.
+
+\textgreater n:=10000000; r:=random(1,n);
+
+Selanjutnya kita hitung jarak antara dua bilangan kurang dari 0,05.
+
+\textgreater a:=0.05; d:=differences(nonzeros(r\textless a));
+
+Akhirnya, kami memplot berapa kali, setiap jarak terjadi, dan membandingkan dengan nilai yang diharapkan.
+
+\textgreater m=getmultiplicities(1:100,d); plot2d(m); \ldots{}\\
+\textgreater{} plot2d(``n*(1-a)\textsuperscript{(x-1)*a}2'',color=red,\textgreater add):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-040.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-040.png}
+\end{figure}
+
+Hapus datanya.
+
+\textgreater remvalue n;
+
+\chapter{Pengantar untuk Pengguna Proyek R}\label{pengantar-untuk-pengguna-proyek-r}
+
+Jelas, EMT tidak bersaing dengan R sebagai paket statistik. Namun, ada banyak prosedur dan fungsi statistik yang tersedia di EMT juga. Jadi EMT dapat memenuhi kebutuhan dasar. Bagaimanapun, EMT hadir dengan paket numerik dan sistem aljabar komputer.
+
+Notebook ini cocok untuk Anda yang terbiasa dengan R, tetapi perlu mengetahui perbedaan sintaks EMT dan R. Kami mencoba memberikan gambaran tentang hal-hal yang jelas dan kurang jelas yang perlu Anda ketahui.
+
+Selain itu, kami mencari cara untuk bertukar data antara kedua sistem.
+
+Perhatikan bahwa ini adalah pekerjaan yang sedang berjalan.
+
+\chapter{Sintaks Dasar}\label{sintaks-dasar}
+
+Hal pertama yang Anda pelajari di R adalah membuat vektor. Di EMT, perbedaan utama adalah bahwa : operator dapat mengambil ukuran langkah. Selain itu, ia memiliki daya ikat yang rendah.
+
+\textgreater n=10; 0:n/20:n-1
+
+\begin{verbatim}
+[0,  0.5,  1,  1.5,  2,  2.5,  3,  3.5,  4,  4.5,  5,  5.5,  6,  6.5,
+7,  7.5,  8,  8.5,  9]
+\end{verbatim}
+
+Fungsi c() tidak ada. Dimungkinkan untuk menggunakan vektor untuk menggabungkan sesuatu.
+
+Contoh berikut, seperti banyak contoh lainnya, dari ``Interoduction to R'' yang disertakan dengan proyek R. Jika Anda membaca PDF ini, Anda akan menemukan bahwa saya mengikuti jalannya dalam tutorial ini.
+
+\textgreater x={[}10.4, 5.6, 3.1, 6.4, 21.7{]}; {[}x,0,x{]}
+
+\begin{verbatim}
+[10.4,  5.6,  3.1,  6.4,  21.7,  0,  10.4,  5.6,  3.1,  6.4,  21.7]
+\end{verbatim}
+
+Operator titik dua dengan ukuran langkah EMT diganti dengan fungsi seq() di R. Kita bisa menulis fungsi ini di EMT.
+
+\textgreater function seq(a,b,c) := a:b:c; \ldots{}\\
+\textgreater{} seq(0,-0.1,-1)
+
+\begin{verbatim}
+[0,  -0.1,  -0.2,  -0.3,  -0.4,  -0.5,  -0.6,  -0.7,  -0.8,  -0.9,  -1]
+\end{verbatim}
+
+Fungsi rep() dari R tidak ada di EMT. Untuk input vektor, dapat ditulis sebagai berikut.
+
+\textgreater function rep(x:vector,n:index) := flatten(dup(x,n)); \ldots{}\\
+\textgreater{} rep(x,2)
+
+\begin{verbatim}
+[10.4,  5.6,  3.1,  6.4,  21.7,  10.4,  5.6,  3.1,  6.4,  21.7]
+\end{verbatim}
+
+Perhatikan bahwa ``='' atau ``:='' digunakan untuk tugas. Operator ``-\textgreater{}'' digunakan untuk unit di EMT.
+
+\textgreater125km -\textgreater{} '' miles''
+
+\begin{verbatim}
+77.6713990297 miles
+\end{verbatim}
+
+Operator ``\textless-'' untuk penugasan tetap menyesatkan, dan bukan ide yang baik untuk R. Berikut ini akan membandingkan a dan -4 di EMT.
+
+\textgreater a=2; a\textless-4
+
+\begin{verbatim}
+0
+\end{verbatim}
+
+Di R, ``a\textless-4\textless3'' berfungsi, tetapi ``a\textless-4\textless-3'' tidak. Saya juga memiliki ambiguitas serupa di EMT, tetapi mencoba menghilangkannya perlahan-lahan.
+
+EMT dan R memiliki vektor bertipe boolean. Namun di EMT, angka 0 dan 1 digunakan untuk mewakili salah dan benar. Di R, nilai true dan false dapat digunakan dalam aritmatika biasa seperti di EMT.
+
+\textgreater x\textless5, \%*x
+
+\begin{verbatim}
+[0,  0,  1,  0,  0]
+[0,  0,  3.1,  0,  0]
+\end{verbatim}
+
+EMT melempar kesalahan atau menghasilkan NAN tergantung pada tanda ``kesalahan''.
+
+\textgreater errors off; 0/0, isNAN(sqrt(-1)), errors on;
+
+\begin{verbatim}
+NAN
+1
+\end{verbatim}
+
+String sama di R dan EMT. Keduanya berada di lokal saat ini, bukan di Unicode.
+
+Di R ada paket untuk Unicode. Di EMT, sebuah string dapat berupa string Unicode. String unicode dapat diterjemahkan ke pengkodean lokal dan sebaliknya. Selain itu, u''\ldots'' dapat berisi entitas HTML.
+
+\textgreater u''© Ren\&eacut; Grothmann''
+
+\begin{verbatim}
+© René Grothmann
+\end{verbatim}
+
+Berikut ini mungkin atau mungkin tidak ditampilkan dengan benar di sistem Anda sebagai A dengan titik dan garis di atasnya. Itu tergantung pada font yang Anda gunakan.
+
+\textgreater chartoutf({[}480{]})
+
+\begin{verbatim}
+Ǡ
+\end{verbatim}
+
+Penggabungan string dilakukan dengan ``+'' atau ``\textbar{}''. Ini dapat mencakup angka, yang akan dicetak dalam format saat ini.
+
+\textgreater{}``pi =''+pi
+
+\begin{verbatim}
+pi = 3.14159265359
+\end{verbatim}
+
+\chapter{Pengindeksan}\label{pengindeksan}
+
+Sebagian besar waktu, ini akan berfungsi seperti pada R.
+
+Tetapi EMT akan menginterpretasikan indeks negatif dari belakang vektor, sedangkan R menginterpretasikan x{[}n{]} sebagai x tanpa elemen ke-n.
+
+\textgreater x, x{[}1:3{]}, x{[}-2{]}
+
+\begin{verbatim}
+[10.4,  5.6,  3.1,  6.4,  21.7]
+[10.4,  5.6,  3.1]
+6.4
+\end{verbatim}
+
+Perilaku R dapat dicapai dalam EMT dengan drop().
+
+\textgreater drop(x,2)
+
+\begin{verbatim}
+[10.4,  3.1,  6.4,  21.7]
+\end{verbatim}
+
+Vektor logis tidak diperlakukan secara berbeda sebagai indeks di EMT, berbeda dengan R. Anda perlu mengekstrak elemen bukan nol terlebih dahulu di EMT.
+
+\textgreater x, x\textgreater5, x{[}nonzeros(x\textgreater5){]}
+
+\begin{verbatim}
+[10.4,  5.6,  3.1,  6.4,  21.7]
+[1,  1,  0,  1,  1]
+[10.4,  5.6,  6.4,  21.7]
+\end{verbatim}
+
+Sama seperti di R, vektor indeks dapat berisi pengulangan.
+
+\begin{verbatim}
+[10.4,  5.6,  5.6,  10.4]
+\end{verbatim}
+
+Tetapi nama untuk indeks tidak dimungkinkan di EMT. Untuk paket statistik, ini mungkin sering diperlukan untuk memudahkan akses ke elemen vektor.
+
+Untuk meniru perilaku ini, kita dapat mendefinisikan fungsi sebagai berikut.
+
+\textgreater function sel (v,i,s) := v{[}indexof(s,i){]}; \ldots{}\\
+\textgreater{} s={[}``first'',``second'',``third'',``fourth''{]}; sel(x,{[}``first'',``third''{]},s)
+
+\begin{verbatim}
+Trying to overwrite protected function sel!
+Error in:
+function sel (v,i,s) := v[indexof(s,i)]; ... ...
+             ^
+
+Trying to overwrite protected function sel!
+Error in:
+function sel (v,i,s) := v[indexof(s,i)]; ... ...
+             ^
+[10.4,  3.1]
+\end{verbatim}
+
+\chapter{Tipe Data}\label{tipe-data}
+
+EMT memiliki lebih banyak tipe data tetap daripada R. Jelas, di R ada vektor yang tumbuh. Anda dapat mengatur vektor numerik kosong v dan menetapkan nilai ke elemen v{[}17{]}. Ini tidak mungkin di EMT.
+
+Berikut ini agak tidak efisien.
+
+\textgreater v={[}{]}; for i=1 to 10000; v=v\textbar i; end;
+
+EMT sekarang akan membuat vektor dengan v dan i ditambahkan pada tumpukan dan menyalin vektor itu kembali ke variabel global v.
+
+Semakin efisien pra-mendefinisikan vektor.
+
+\textgreater v=zeros(10000); for i=1 to 10000; v{[}i{]}=i; end;
+
+Untuk mengubah jenis tanggal di EMT, Anda dapat menggunakan fungsi seperti complex().
+
+\textgreater complex(1:4)
+
+\begin{verbatim}
+[ 1+0i ,  2+0i ,  3+0i ,  4+0i  ]
+\end{verbatim}
+
+Konversi ke string hanya dimungkinkan untuk tipe data dasar. Format saat ini digunakan untuk rangkaian string sederhana. Tetapi ada fungsi seperti print() atau frac().
+
+Untuk vektor, Anda dapat dengan mudah menulis fungsi Anda sendiri.
+
+\textgreater function tostr (v) \ldots{}
+
+\begin{verbatim}
+s="[";
+loop 1 to length(v);
+   s=s+print(v[#],2,0);
+   if #<length(v) then s=s+","; endif;
+end;
+return s+"]";
+endfunction
+\end{verbatim}
+
+\textgreater tostr(linspace(0,1,10))
+
+\begin{verbatim}
+[0.00,0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1.00]
+\end{verbatim}
+
+Untuk komunikasi dengan Maxima, terdapat fungsi convertmxm(), yang juga dapat digunakan untuk memformat vektor untuk output.
+
+\textgreater convertmxm(1:10)
+
+\begin{verbatim}
+[1,2,3,4,5,6,7,8,9,10]
+\end{verbatim}
+
+Untuk Latex perintah tex dapat digunakan untuk mendapatkan perintah Latex.
+
+\textgreater tex(\&{[}1,2,3{]})
+
+\begin{verbatim}
+\left[ 1 , 2 , 3 \right] 
+\end{verbatim}
+
+\chapter{Faktor dan Tabel}\label{faktor-dan-tabel}
+
+Dalam pengantar R ada contoh dengan apa yang disebut faktor.
+
+Berikut ini adalah daftar wilayah dari 30 negara bagian.
+
+\textgreater austates = {[}``tas'', ``sa'', ``qld'', ``nsw'', ``nsw'', ``nt'', ``wa'', ``wa'', \ldots{}\\
+\textgreater{} ``qld'', ``vic'', ``nsw'', ``vic'', ``qld'', ``qld'', ``sa'', ``tas'', \ldots{}\\
+\textgreater{} ``sa'', ``nt'', ``wa'', ``vic'', ``qld'', ``nsw'', ``nsw'', ``wa'', \ldots{}\\
+\textgreater{} ``sa'', ``act'', ``nsw'', ``vic'', ``vic'', ``act''{]};
+
+Asumsikan, kita memiliki pendapatan yang sesuai di setiap negara bagian.
+
+\textgreater incomes = {[}60, 49, 40, 61, 64, 60, 59, 54, 62, 69, 70, 42, 56, \ldots{}\\
+\textgreater{} 61, 61, 61, 58, 51, 48, 65, 49, 49, 41, 48, 52, 46, \ldots{}\\
+\textgreater{} 59, 46, 58, 43{]};
+
+Sekarang, kami ingin menghitung rata-rata pendapatan di wilayah tersebut. Menjadi program statistik, R memiliki factor() dan tappy() untuk ini.
+
+EMT dapat melakukannya dengan menemukan indeks wilayah dalam daftar wilayah yang unik.
+
+\textgreater auterr=sort(unique(austates)); f=indexofsorted(auterr,austates)
+
+\begin{verbatim}
+[6,  5,  4,  2,  2,  3,  8,  8,  4,  7,  2,  7,  4,  4,  5,  6,  5,  3,
+8,  7,  4,  2,  2,  8,  5,  1,  2,  7,  7,  1]
+\end{verbatim}
+
+Pada titik itu, kita dapat menulis fungsi loop kita sendiri untuk melakukan sesuatu hanya untuk satu faktor.
+
+Atau kita bisa meniru fungsi tapply() dengan cara berikut.
+
+\textgreater function map tappl (i; f\$:call, cat, x) \ldots{}
+
+\begin{verbatim}
+u=sort(unique(cat));
+f=indexof(u,cat);
+return f$(x[nonzeros(f==indexof(u,i))]);
+endfunction
+\end{verbatim}
+
+Ini agak tidak efisien, karena menghitung wilayah unik untuk setiap i, tetapi berhasil.
+
+\textgreater tappl(auterr,``mean'',austates,incomes)
+
+\begin{verbatim}
+[44.5,  57.3333333333,  55.5,  53.6,  55,  60.5,  56,  52.25]
+\end{verbatim}
+
+Perhatikan bahwa ini berfungsi untuk setiap vektor wilayah.
+
+\textgreater tappl({[}``act'',``nsw''{]},``mean'',austates,incomes)
+
+\begin{verbatim}
+[44.5,  57.3333333333]
+\end{verbatim}
+
+Sekarang, paket statistik EMT mendefinisikan tabel seperti di R. Fungsi readtable() dan writetable() dapat digunakan untuk input dan output.
+
+Jadi kita bisa mencetak rata-rata pendapatan negara di wilayah dengan cara yang bersahabat.
+
+\textgreater writetable(tappl(auterr,``mean'',austates,incomes),labc=auterr,wc=7)
+
+\begin{verbatim}
+    act    nsw     nt    qld     sa    tas    vic     wa
+   44.5  57.33   55.5   53.6     55   60.5     56  52.25
+\end{verbatim}
+
+Kita juga dapat mencoba meniru perilaku R sepenuhnya.
+
+Faktor-faktor tersebut harus dengan jelas disimpan dalam kumpulan dengan jenis dan kategori (negara bagian dan teritori dalam contoh kami). Untuk EMT, kami menambahkan indeks yang telah dihitung sebelumnya.
+
+\textgreater function makef (t) \ldots{}
+
+\begin{verbatim}
+## Factor data
+## Returns a collection with data t, unique data, indices.
+## See: tapply
+u=sort(unique(t));
+return {{t,u,indexofsorted(u,t)}};
+endfunction
+\end{verbatim}
+
+\textgreater statef=makef(austates);
+
+Sekarang elemen ketiga dari koleksi akan berisi indeks.
+
+\textgreater statef{[}3{]}
+
+\begin{verbatim}
+[6,  5,  4,  2,  2,  3,  8,  8,  4,  7,  2,  7,  4,  4,  5,  6,  5,  3,
+8,  7,  4,  2,  2,  8,  5,  1,  2,  7,  7,  1]
+\end{verbatim}
+
+Sekarang kita bisa meniru tapply() dengan cara berikut. Ini akan mengembalikan tabel sebagai kumpulan data tabel dan judul kolom.
+
+\textgreater function tapply (t:vector,tf,f\$:call) \ldots{}
+
+\begin{verbatim}
+## Makes a table of data and factors
+## tf : output of makef()
+## See: makef
+uf=tf[2]; f=tf[3]; x=zeros(length(uf));
+for i=1 to length(uf);
+   ind=nonzeros(f==i);
+   if length(ind)==0 then x[i]=NAN;
+   else x[i]=f$(t[ind]);
+   endif;
+end;
+return {{x,uf}};
+endfunction
+\end{verbatim}
+
+Kami tidak menambahkan banyak jenis pengecekan di sini. Satu-satunya tindakan pencegahan menyangkut kategori (faktor) tanpa data. Tetapi orang harus memeriksa panjang t yang benar dan kebenaran koleksi tf.
+
+Tabel ini dapat dicetak sebagai tabel dengan writetable().
+
+\textgreater writetable(tapply(incomes,statef,``mean''),wc=7)
+
+\begin{verbatim}
+    act    nsw     nt    qld     sa    tas    vic     wa
+   44.5  57.33   55.5   53.6     55   60.5     56  52.25
+\end{verbatim}
+
+\chapter{Array}\label{array}
+
+EMT hanya memiliki dua dimensi untuk array. Tipe datanya disebut matriks. Akan mudah untuk menulis fungsi untuk dimensi yang lebih tinggi atau pustaka C untuk ini.
+
+R memiliki lebih dari dua dimensi. Dalam R array adalah vektor dengan bidang dimensi.
+
+Dalam EMT, vektor adalah matriks dengan satu baris. Itu dapat dibuat menjadi matriks dengan redim().
+
+\textgreater shortformat; X=redim(1:20,4,5)
+
+\begin{verbatim}
+        1         2         3         4         5 
+        6         7         8         9        10 
+       11        12        13        14        15 
+       16        17        18        19        20 
+\end{verbatim}
+
+Ekstraksi baris dan kolom, atau sub-matriks, sangat mirip dengan R.
+
+\textgreater X{[},2:3{]}
+
+\begin{verbatim}
+        2         3 
+        7         8 
+       12        13 
+       17        18 
+\end{verbatim}
+
+Namun, dalam R dimungkinkan untuk menetapkan daftar indeks spesifik dari vektor ke suatu nilai. Hal yang sama dimungkinkan di EMT hanya dengan loop.
+
+\textgreater function setmatrixvalue (M, i, j, v) \ldots{}
+
+\begin{verbatim}
+loop 1 to max(length(i),length(j),length(v))
+   M[i{#},j{#}] = v{#};
+end;
+endfunction
+\end{verbatim}
+
+Kami mendemonstrasikan ini untuk menunjukkan bahwa matriks dilewatkan dengan referensi di EMT. Jika Anda tidak ingin mengubah matriks asli M, Anda perlu menyalinnya ke dalam fungsi.
+
+\textgreater setmatrixvalue(X,1:3,3:-1:1,0); X,
+
+\begin{verbatim}
+        1         2         0         4         5 
+        6         0         8         9        10 
+        0        12        13        14        15 
+       16        17        18        19        20 
+\end{verbatim}
+
+Perkalian luar dalam EMT hanya dapat dilakukan antar vektor. Ini otomatis karena bahasa matriks. Satu vektor harus menjadi vektor kolom dan yang lainnya vektor baris.
+
+\textgreater(1:5)*(1:5)'
+
+\begin{verbatim}
+        1         2         3         4         5 
+        2         4         6         8        10 
+        3         6         9        12        15 
+        4         8        12        16        20 
+        5        10        15        20        25 
+\end{verbatim}
+
+Dalam pengantar PDF untuk R ada sebuah contoh, yang menghitung distribusi ab-cd untuk a,b,c,d yang dipilih dari 0 hingga n secara acak. Solusi dalam R adalah membentuk matriks 4 dimensi dan menjalankan table() di atasnya.
+
+Tentu saja, ini dapat dicapai dengan loop. Tapi loop tidak efektif di EMT atau R. Di EMT, kita bisa menulis loop di C dan itu akan menjadi solusi tercepat.
+
+Tapi kita ingin meniru perilaku R. Untuk ini, kita perlu meratakan perkalian ab dan membuat matriks ab-cd.
+
+\textgreater a=0:6; b=a'; p=flatten(a*b); q=flatten(p-p'); \ldots{}\\
+\textgreater{} u=sort(unique(q)); f=getmultiplicities(u,q); \ldots{}\\
+\textgreater{} statplot(u,f,``h''):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-041.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-041.png}
+\end{figure}
+
+Selain multiplisitas yang tepat, EMT dapat menghitung frekuensi dalam vektor.
+
+\textgreater getfrequencies(q,-50:10:50)
+
+\begin{verbatim}
+[0,  23,  132,  316,  602,  801,  333,  141,  53,  0]
+\end{verbatim}
+
+Cara paling mudah untuk memplot ini sebagai distribusi adalah sebagai berikut.
+
+\textgreater plot2d(q,distribution=11):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-042.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-042.png}
+\end{figure}
+
+Tetapi juga dimungkinkan untuk menghitung sebelumnya hitungan dalam interval yang dipilih sebelumnya. Tentu saja, berikut ini menggunakan getfrequencies() secara internal.
+
+Karena fungsi histo() mengembalikan frekuensi, kita perlu menskalakannya sehingga integral di bawah grafik batang adalah 1.
+
+\textgreater\{x,y\}=histo(q,v=-55:10:55); y=y/sum(y)/differences(x); \ldots{}\\
+\textgreater{} plot2d(x,y,\textgreater bar,style=``/''):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-043.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-043.png}
+\end{figure}
+
+\chapter{Daftar}\label{daftar}
+
+EMT memiliki dua macam daftar. Salah satunya adalah daftar global yang dapat diubah, dan yang lainnya adalah jenis daftar yang tidak dapat diubah. Kami tidak peduli dengan daftar global di sini.
+
+Jenis daftar yang tidak dapat diubah disebut koleksi di EMT. Itu berperilaku seperti struktur di C, tetapi elemennya hanya diberi nomor dan tidak diberi nama.
+
+\textgreater L=\{\{``Fred'',``Flintstone'',40,{[}1990,1992{]}\}\}
+
+\begin{verbatim}
+Fred
+Flintstone
+40
+[1990,  1992]
+\end{verbatim}
+
+Saat ini elemen tidak memiliki nama, meskipun nama dapat ditetapkan untuk tujuan khusus. Mereka diakses dengan angka.
+
+\textgreater(L{[}4{]}){[}2{]}
+
+\begin{verbatim}
+1992
+\end{verbatim}
+
+\chapter{File Input dan Output (Membaca dan Menulis Data)}\label{file-input-dan-output-membaca-dan-menulis-data}
+
+Anda akan sering ingin mengimpor matriks data dari sumber lain ke EMT. Tutorial ini memberitahu Anda tentang banyak cara untuk mencapai ini. Fungsi sederhana adalah writematrix() dan readmatrix().
+
+Mari kita tunjukkan cara membaca dan menulis vektor real ke file.
+
+\textgreater a=random(1,100); mean(a), dev(a),
+
+\begin{verbatim}
+0.50211
+0.29459
+\end{verbatim}
+
+Untuk menulis data ke file, kita menggunakan fungsi writematrix().
+
+Karena pengenalan ini kemungkinan besar berada di direktori, di mana pengguna tidak memiliki akses tulis, kami menulis data ke direktori home pengguna. Untuk notebook sendiri, ini tidak perlu, karena file data akan ditulis ke dalam direktori yang sama.
+
+\textgreater filename=``test.dat'';
+
+Sekarang kita menulis vektor kolom a' ke file. Ini menghasilkan satu nomor di setiap baris file.
+
+\textgreater writematrix(a',filename);
+
+Untuk membaca data, kita gunakan readmatrix().
+
+\textgreater a=readmatrix(filename)';
+
+dan hapus file ini.
+
+\textgreater fileremove(filename);
+
+\textgreater mean(a), dev(a),
+
+\begin{verbatim}
+0.50211
+0.29459
+\end{verbatim}
+
+Fungsi writematrix() atau writetable() dapat dikonfigurasi untuk bahasa lain.
+
+Misalnya, jika Anda memiliki sistem Indonesia (titik desimal dengan koma), Excel Anda memerlukan nilai dengan koma desimal yang dipisahkan oleh titik koma dalam file csv (defaultnya adalah nilai yang dipisahkan koma). File ``test.csv'' berikut akan muncul di folder cuurent Anda.
+
+\textgreater filename=``test.csv''; \ldots{}\\
+\textgreater{} writematrix(random(5,3),file=filename,separator=``,'');
+
+Anda sekarang dapat membuka file ini dengan Excel Indonesia secara langsung.
+
+\textgreater fileremove(filename);
+
+Terkadang kita memiliki string dengan token seperti berikut ini.
+
+\textgreater s1:=``f m m f m m m f f f m m f''; \ldots{}\\
+\textgreater{} s2:=``f f f m m f f'';
+
+Untuk tokenize ini, kita mendefinisikan vektor token.
+
+\textgreater tok:={[}``f'',``m''{]}
+
+\begin{verbatim}
+f
+m
+\end{verbatim}
+
+Kemudian kita dapat menghitung berapa kali setiap token muncul dalam string, dan memasukkan hasilnya ke dalam tabel.
+
+\textgreater M:=getmultiplicities(tok,strtokens(s1))\_ \ldots{}\\
+\textgreater{} getmultiplicities(tok,strtokens(s2));
+
+Tulis tabel dengan header token.
+
+\textgreater writetable(M,labc=tok,labr=1:2,wc=8)
+
+\begin{verbatim}
+               f       m
+       1       6       7
+       2       5       2
+\end{verbatim}
+
+Untuk statika, EMT dapat membaca dan menulis tabel.
+
+\textgreater file=``test.dat''; open(file,``w''); \ldots{}\\
+\textgreater{} writeln(``A,B,C''); writematrix(random(3,3)); \ldots{}\\
+\textgreater{} close();
+
+Filenya terlihat seperti ini.
+
+\textgreater printfile(file)
+
+\begin{verbatim}
+A,B,C
+0.7906038030988179,0.4803433189304462,0.01562723532706266
+0.5322177080616844,0.6195470335248382,0.7709411906683823
+0.09018286162314156,0.2018229850358114,0.1390461869625961
+\end{verbatim}
+
+Fungsi readtable() dalam bentuknya yang paling sederhana dapat membaca ini dan mengembalikan kumpulan nilai dan baris judul.
+
+\textgreater L=readtable(file,\textgreater list);
+
+Koleksi ini dapat dicetak dengan writetable() ke notebook, atau ke file.
+
+\textgreater writetable(L,wc=10,dc=5)
+
+\begin{verbatim}
+         A         B         C
+    0.7906   0.48034   0.01563
+   0.53222   0.61955   0.77094
+   0.09018   0.20182   0.13905
+\end{verbatim}
+
+Matriks nilai adalah elemen pertama dari L. Perhatikan bahwa mean() dalam EMT menghitung nilai rata-rata dari baris matriks.
+
+\textgreater mean(L{[}1{]})
+
+\begin{verbatim}
+  0.42886 
+   0.6409 
+  0.14368 
+\end{verbatim}
+
+\chapter{File CSV}\label{file-csv}
+
+Pertama, mari kita menulis matriks ke dalam file. Untuk output, kami membuat file di direktori kerja saat ini.
+
+\textgreater file=``test.csv''; \ldots{}\\
+\textgreater{} M=random(3,3); writematrix(M,file);
+
+Berikut adalah isi dari file ini.
+
+\textgreater printfile(file)
+
+\begin{verbatim}
+0.1252557605722638,0.6012469907784808,0.6327305826275141
+0.3772725626212395,0.7156581896501343,0.505137263767732
+0.1864748168039878,0.08573131043797423,0.3856751945719084
+\end{verbatim}
+
+CVS ini dapat dibuka pada sistem bahasa Inggris ke Excel dengan klik dua kali. Jika Anda mendapatkan file seperti itu di sistem Jerman, Anda perlu mengimpor data ke Excel dengan memperhatikan titik desimal.
+
+Tetapi titik desimal juga merupakan format default untuk EMT. Anda dapat membaca matriks dari file dengan readmatrix().
+
+\textgreater readmatrix(file)
+
+\begin{verbatim}
+  0.12526   0.60125   0.63273 
+  0.37727   0.71566   0.50514 
+  0.18647  0.085731   0.38568 
+\end{verbatim}
+
+Dimungkinkan untuk menulis beberapa matriks ke satu file. Perintah open() dapat membuka file untuk ditulis dengan parameter ``w''. Standarnya adalah ``r'' untuk membaca.
+
+\textgreater open(file,``w''); writematrix(M); writematrix(M'); close();
+
+Matriks dipisahkan oleh garis kosong. Untuk membaca matriks, buka file dan panggil readmatrix() beberapa kali.
+
+\textgreater open(file); A=readmatrix(); B=readmatrix(); A==B, close();
+
+\begin{verbatim}
+        1         0         0 
+        0         1         0 
+        0         0         1 
+\end{verbatim}
+
+Di Excel atau spreadsheet serupa, Anda dapat mengekspor matriks sebagai CSV (nilai yang dipisahkan koma). Di Excel 2007, gunakan ``simpan sebagai'' dan ``format lain'', lalu pilih ``CSV''. Pastikan, tabel saat ini hanya berisi data yang ingin Anda ekspor.
+
+Berikut adalah contoh.
+
+\textgreater printfile(``excel-data.csv'')
+
+\begin{verbatim}
+Could not open the file
+excel-data.csv
+for reading!
+Try "trace errors" to inspect local variables after errors.
+printfile:
+    open(filename,"r");
+\end{verbatim}
+
+Seperti yang Anda lihat, sistem Jerman saya menggunakan titik koma sebagai pemisah dan koma desimal. Anda dapat mengubah ini di pengaturan sistem atau di Excel, tetapi tidak perlu membaca matriks ke dalam EMT.
+
+Cara termudah untuk membaca ini ke dalam Euler adalah readmatrix(). Semua koma diganti dengan titik dengan parameter \textgreater comma. Untuk CSV bahasa Inggris, cukup abaikan parameter ini.
+
+\textgreater M=readmatrix(``excel-data.csv'',\textgreater comma)
+
+\begin{verbatim}
+Could not open the file
+excel-data.csv
+for reading!
+Try "trace errors" to inspect local variables after errors.
+readmatrix:
+    if filename&lt;&gt;"" then open(filename,"r"); endif;
+\end{verbatim}
+
+Mari kita plot ini.
+
+\textgreater plot2d(M'{[}1{]},M'{[}2:3{]},\textgreater points,color={[}red,green{]}'):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-044.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-044.png}
+\end{figure}
+
+Ada cara yang lebih mendasar untuk membaca data dari file. Anda dapat membuka file dan membaca angka baris demi baris. Fungsi getvectorline() akan membaca angka dari baris data. Secara default, ia mengharapkan titik desimal. Tapi itu juga bisa menggunakan koma desimal, jika Anda memanggil setdecimaldot(``,'') sebelum Anda menggunakan fungsi ini.
+
+Fungsi berikut adalah contoh untuk ini. Ini akan berhenti di akhir file atau baris kosong.
+
+\textgreater function myload (file) \ldots{}
+
+\begin{verbatim}
+open(file);
+M=[];
+repeat
+   until eof();
+   v=getvectorline(3);
+   if length(v)>0 then M=M_v; else break; endif;
+end;
+return M;
+close(file);
+endfunction
+\end{verbatim}
+
+\textgreater myload(file)
+
+\begin{verbatim}
+  0.12526         0   0.60125         0   0.63273 
+  0.37727         0   0.71566         0   0.50514 
+  0.18647         0  0.085731         0   0.38568 
+\end{verbatim}
+
+Dimungkinkan juga untuk membaca semua angka dalam file itu dengan getvector().
+
+\textgreater open(file); v=getvector(10000); close(); redim(v{[}1:9{]},3,3)
+
+\begin{verbatim}
+  0.12526         0   0.60125 
+        0   0.63273   0.37727 
+        0   0.71566         0 
+\end{verbatim}
+
+Jadi sangat mudah untuk menyimpan vektor nilai, satu nilai di setiap baris dan membaca kembali vektor ini.
+
+\textgreater v=random(1000); mean(v)
+
+\begin{verbatim}
+0.50401
+\end{verbatim}
+
+\textgreater writematrix(v',file); mean(readmatrix(file)')
+
+\begin{verbatim}
+0.50401
+\end{verbatim}
+
+\chapter{Menggunakan Tabel}\label{menggunakan-tabel}
+
+Tabel dapat digunakan untuk membaca atau menulis data numerik. Sebagai contoh, kami menulis tabel dengan header baris dan kolom ke file.
+
+\textgreater file=``test.tab''; M=random(3,3); \ldots{}\\
+\textgreater{} open(file,``w''); \ldots{}\\
+\textgreater{} writetable(M,separator=``,'',labc={[}``one'',``two'',``three''{]}); \ldots{}\\
+\textgreater{} close(); \ldots{}\\
+\textgreater{} printfile(file)
+
+\begin{verbatim}
+one,two,three
+      0.55,      0.52,      0.12
+      0.69,      0.97,      0.07
+      0.57,      0.18,      0.27
+\end{verbatim}
+
+Ini dapat diimpor ke Excel.
+
+Untuk membaca file dalam EMT, kami menggunakan readtable().
+
+\textgreater\{M,headings\}=readtable(file,\textgreater clabs); \ldots{}\\
+\textgreater{} writetable(M,labc=headings)
+
+\begin{verbatim}
+       one       two     three
+      0.55      0.52      0.12
+      0.69      0.97      0.07
+      0.57      0.18      0.27
+\end{verbatim}
+
+\chapter{Menganalisis Garis}\label{menganalisis-garis}
+
+Anda bahkan dapat mengevaluasi setiap baris dengan tangan. Misalkan, kita memiliki garis dengan format berikut.
+
+\textgreater line=``2020-11-03,Tue,1'114.05''
+
+\begin{verbatim}
+2020-11-03,Tue,1'114.05
+\end{verbatim}
+
+Pertama kita dapat menandai garis.
+
+\textgreater vt=strtokens(line)
+
+\begin{verbatim}
+2020-11-03
+Tue
+1'114.05
+\end{verbatim}
+
+Kemudian kita dapat mengevaluasi setiap elemen garis menggunakan evaluasi yang sesuai.
+
+\textgreater day(vt{[}1{]}), \ldots{}\\
+\textgreater{} indexof({[}``mon'',``tue'',``wed'',``thu'',``fri'',``sat'',``sun''{]},tolower(vt{[}2{]})), \ldots{}\\
+\textgreater{} strrepl(vt{[}3{]},``''',``\,``)()
+
+\begin{verbatim}
+7.3816e+05
+2
+1114
+\end{verbatim}
+
+Menggunakan ekspresi reguler, dimungkinkan untuk mengekstrak hampir semua informasi dari baris data.
+
+Asumsikan kita memiliki baris berikut dokumen HTML.
+
+\textgreater line=``\textless tr\textgreater\textless td\textgreater1145.45\textless/td\textgreater\textless td\textgreater5.6\textless/td\textgreater\textless td\textgreater-4.5\textless/td\textgreater\textless tr\textgreater{}''
+
+\begin{verbatim}
+&lt;tr&gt;&lt;td&gt;1145.45&lt;/td&gt;&lt;td&gt;5.6&lt;/td&gt;&lt;td&gt;-4.5&lt;/td&gt;&lt;tr&gt;
+\end{verbatim}
+
+Untuk mengekstrak ini, kami menggunakan ekspresi reguler, yang mencari
+
+\begin{itemize}
+\tightlist
+\item
+  kurung tutup \textgreater,\\
+\item
+  string apa pun yang tidak mengandung tanda kurung dengan
+\end{itemize}
+
+sub-pertandingan ``(\ldots)'',
+
+\begin{itemize}
+\item
+  braket pembuka dan penutup menggunakan solusi terpendek,
+\item
+  lagi string apa pun yang tidak mengandung tanda kurung,
+\item
+  dan kurung buka \textless.
+\end{itemize}
+
+Ekspresi reguler agak sulit dipelajari tetapi sangat kuat.
+
+\textgreater\{pos,s,vt\}=strxfind(line,``\textgreater({[}\^{}\textless\textbackslash\textgreater{]}+)\textless.+?\textgreater({[}\^{}\textless\textbackslash\textgreater{]}+)\textless{}'');
+
+Hasilnya adalah posisi kecocokan, string yang cocok, dan vektor string untuk sub-pertandingan.
+
+\textgreater for k=1:length(vt); vt\href{}{k}, end;
+
+\begin{verbatim}
+1145.5
+5.6
+\end{verbatim}
+
+Berikut adalah fungsi, yang membaca semua item numerik antara \textless td\textgreater{} dan \textless/td\textgreater.
+
+\textgreater function readtd (line) \ldots{}
+
+\begin{verbatim}
+v=[]; cp=0;
+repeat
+   {pos,s,vt}=strxfind(line,"<td.*?>(.+?)</td>",cp);
+   until pos==0;
+   if length(vt)>0 then v=v|vt[1]; endif;
+   cp=pos+strlen(s);
+end;
+return v;
+endfunction
+\end{verbatim}
+
+\textgreater readtd(line+``\textless td\textgreater non-numerical\textless/td\textgreater{}'')
+
+\begin{verbatim}
+1145.45
+5.6
+-4.5
+non-numerical
+\end{verbatim}
+
+\chapter{Membaca dari Web}\label{membaca-dari-web}
+
+Situs web atau file dengan URL dapat dibuka di EMT dan dapat dibaca baris demi baris.
+
+Dalam contoh, kami membaca versi saat ini dari situs EMT. Kami menggunakan ekspresi reguler untuk memindai ``Versi \ldots{}'' dalam sebuah judul.
+
+\textgreater function readversion () \ldots{}
+
+\begin{verbatim}
+urlopen("http://www.euler-math-toolbox.de/Programs/Changes.html");
+repeat
+  until urleof();
+  s=urlgetline();
+  k=strfind(s,"Version ",1);
+  if k>0 then substring(s,k,strfind(s,"<",k)-1), break; endif;
+end;
+urlclose();
+endfunction
+\end{verbatim}
+
+\textgreater readversion
+
+\begin{verbatim}
+Version 2024-01-12
+\end{verbatim}
+
+\chapter{Input dan Output Variabel}\label{input-dan-output-variabel}
+
+Anda dapat menulis variabel dalam bentuk definisi Euler ke file atau ke baris perintah.
+
+\textgreater writevar(pi,``mypi'');
+
+\begin{verbatim}
+mypi = 3.141592653589793;
+\end{verbatim}
+
+Untuk pengujian, kami membuat file Euler di direktori kerja EMT.
+
+\textgreater file=``test.e''; \ldots{}\\
+\textgreater{} writevar(random(2,2),``M'',file); \ldots{}\\
+\textgreater{} printfile(file,3)
+
+\begin{verbatim}
+M = [ ..
+0.2523268025590937, 0.864411011093732;
+0.9512520925404634, 0.9754744306743734];
+\end{verbatim}
+
+Kita sekarang dapat memuat file. Ini akan mendefinisikan matriks M.
+
+\textgreater load(file); show M,
+
+\begin{verbatim}
+M = 
+  0.25233   0.86441 
+  0.95125   0.97547 
+\end{verbatim}
+
+Omong-omong, jika writevar() digunakan pada variabel, itu akan mencetak definisi variabel dengan nama variabel ini.
+
+\textgreater writevar(M); writevar(inch\$)
+
+\begin{verbatim}
+M = [ ..
+0.2523268025590937, 0.864411011093732;
+0.9512520925404634, 0.9754744306743734];
+inch$ = 0.0254;
+\end{verbatim}
+
+Kita juga bisa membuka file baru atau menambahkan file yang sudah ada. Dalam contoh kami menambahkan ke file yang dihasilkan sebelumnya.
+
+\textgreater open(file,``a''); \ldots{}\\
+\textgreater{} writevar(random(2,2),``M1''); \ldots{}\\
+\textgreater{} writevar(random(3,1),``M2''); \ldots{}\\
+\textgreater{} close();
+
+\textgreater load(file); show M1; show M2;
+
+\begin{verbatim}
+M1 = 
+  0.28214   0.98193 
+  0.83506   0.96104 
+M2 = 
+  0.56036 
+  0.63041 
+  0.14009 
+\end{verbatim}
+
+Untuk menghapus file apa pun, gunakan fileremove().
+
+\textgreater fileremove(file);
+
+Vektor baris dalam file tidak memerlukan koma, jika setiap angka berada di baris baru. Mari kita buat file seperti itu, menulis setiap baris satu per satu dengan writeln().
+
+\textgreater open(file,``w''); writeln(``M = {[}''); \ldots{}\\
+\textgreater{} for i=1 to 5; writeln(''\,''+random()); end; \ldots{}\\
+\textgreater{} writeln(''{]};''); close(); \ldots{}\\
+\textgreater{} printfile(file)
+
+\begin{verbatim}
+M = [
+0.463445270617
+0.221854334165
+0.522065447353
+0.170477000294
+0.366517046538
+];
+\end{verbatim}
+
+\textgreater load(file); M
+
+\begin{verbatim}
+[0.46345,  0.22185,  0.52207,  0.17048,  0.36652]
+\end{verbatim}
+
+catatan : ketika mengenter perintah-perintah diatas ternyata hasil yang didapatkan berbeda-beda
+
+\chapter{Latihan soal}\label{latihan-soal}
+
+Nomor 1
+
+Carilah rata-rata dan standar deviasi beserta plot dari data berikut
+
+X = 1000,1500,1700,2500,3500,4000
+
+\textgreater X={[}1000,1500,1700,2500,3500,4000{]}; \ldots{}\\
+\textgreater{} mean(X), dev(X),
+
+\begin{verbatim}
+2366.7
+1186
+\end{verbatim}
+
+\textgreater aspect(1.5); boxplot(X):
+
+\begin{figure}
+\centering
+\pandocbounded{\includegraphics[keepaspectratio]{images/Nazwa Yuan Adelia Putri_23030630095_EMT4Statistika (1)-045.png}}
+\caption{images/Nazwa\%20Yuan\%20Adelia\%20Putri\_23030630095\_EMT4Statistika\%20(1)-045.png}
+\end{figure}
+
+Nomor 2
+
+Misalkan diberikan data skor hasil statistika dari 14 orang mahasiswa sebagai berikut:
+
+50,92,68,72,84,80,96,64,70,48,88,66,56,84
+
+Tentukan rata-rata dari data tersebut!
+
+\textgreater X={[}62,65,58,90,75,79,82,91,75,75,75,95{]}
+
+\begin{verbatim}
+[62,  65,  58,  90,  75,  79,  82,  91,  75,  75,  75,  95]
+\end{verbatim}
+
+\textgreater mean(X)
+
+\begin{verbatim}
+76.833
+\end{verbatim}
+
+\backmatter
+\end{document}
